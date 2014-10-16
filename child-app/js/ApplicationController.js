@@ -1,3 +1,5 @@
-angular.module("cdd-app").controller("ApplicationController", function () {
-	console.log("Creating ApplicationController");
+define([], function() {
+    angular.module("cdd-app").controller("ApplicationController", function() {
+        console.log("Creating ApplicationController");
+    });
 });

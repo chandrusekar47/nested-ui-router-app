@@ -1,15 +1,23 @@
-var app = angular.module("root-app", ['ui.router', 'cdd-app']);
+var app = angular.module("root-app", ['ui.router', "oc.lazyLoad"]);
 window.subAppMetadata = {
     "cdd-app": {
         baseUrl: "/cdd/",
         baseStateName: "cdd",
-        baseTemplateUrl: "child-app/"
+        baseTemplateUrl: "child-app"
     }
 };
 require.config({
     baseUrl: "child-app/js"
 });
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+    $ocLazyLoadProvider.config({
+        loadedModules: ["root-app"],
+        modules: [{
+            name: 'cdd-app',
+            files: ['child-app/js/main.js']
+        }],
+        asyncLoader: require
+    });
     $stateProvider
         .state("deals", {
             url: "/state1",
@@ -20,7 +28,23 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: "partials/state2.html"
         })
         .state(window.subAppMetadata["cdd-app"].baseStateName, {
+
             url: window.subAppMetadata["cdd-app"].baseUrl,
-            templateUrl: "child-app/partials/child-app.html"
+            templateUrl: "child-app/partials/child-app.html",
+
+            controller: function($ocLazyLoad) {
+                var promise = $ocLazyLoad.load("cdd-app");
+                promise.then(function() {
+                    console.log(arguments);
+                }, function() {
+                    console.log(arguments);
+                })
+            },
+
+            resolve: {
+                loadModule: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load("cdd-app");
+                }
+            }
         });
 });

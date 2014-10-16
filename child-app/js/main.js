@@ -1,4 +1,2 @@
-define("cdd-app",
- ["ApplicationController", "Client360Controller", "InboxController"], function() {
-    return {}
-});
+require(
+ ["app", "ApplicationController", "Client360Controller", "InboxController"], function() {});
