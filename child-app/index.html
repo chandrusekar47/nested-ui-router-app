@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>POC for AngularJS Modularization</title>
+</head>
+<body ng-app="cdd-app">
+	<h1>Welcome to child application.</h1>
+	<h2>Its awesome</h2>
+    <ng-include src="'partials/child-app.html'"></ng-include>
+</body>
+<script type="text/javascript">
+	if (!String.format) {
+        String.format = function (format) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            return format.replace(/{(\d+)}/g, function (match, number) {
+                return typeof args[number] != 'undefined' ? args[number] : match;
+            });
+        };
+    }
+</script>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-ui-router.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</html>
