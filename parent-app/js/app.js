@@ -48,3 +48,24 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
             }
         });
 });
+
+app.run (function ($rootScope) {
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
+        console.log("routeChangeStart");
+    });
+    $rootScope.$on("$stateNotFound", function(event, toState, toParams, fromState, fromParams) {
+        console.log("stateNotFound");
+    });
+    $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
+        console.log("stateChangeSuccess");
+    });
+    $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams) {
+        console.log("stateChangeError");
+    });
+    $rootScope.$on("$viewContentLoading", function(event, toState, toParams, fromState, fromParams) {
+        console.log("viewContentLoading");
+    });
+    $rootScope.$on("$viewContentLoaded", function(event, toState, toParams, fromState, fromParams) {
+        console.log("viewContentLoaded");
+    });
+});
