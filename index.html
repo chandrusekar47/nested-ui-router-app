@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>POC for AngularJS Modularization</title>
+</head>
+<body ng-app="root-app">
+	<h1>Navigate between states in parent app</h1>
+	<ul>
+		<li><a href="#/state1">State 1</a></li>
+		<li><a href="#/state2">State 2</a></li>
+		<li><a href="#/childapp">Child App</a></li>
+	</ul>
+	<h2>Parent ui-view:</h2>
+	<div ui-view style="border:thin blue solid"></div>
+</body>
+<script type="text/javascript">
+	if (!String.format) {
+        String.format = function (format) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            return format.replace(/{(\d+)}/g, function (match, number) {
+                return typeof args[number] != 'undefined' ? args[number] : match;
+            });
+        };
+    }
+</script>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-ui-router.js"></script>
+<script type="text/javascript" src="js/bootstrap-app2.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</html>
